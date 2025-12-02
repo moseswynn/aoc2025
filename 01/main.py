@@ -9,6 +9,8 @@ class Dial(deque):
     def __init__(self, initial_value: int):
         super().__init__(range(100))
         super().rotate(initial_value)
+
+        self.zero_count = 0
         
 
     @property
@@ -16,13 +18,16 @@ class Dial(deque):
         return self[0]
     
     def rotate(self, direction: DialDirections, steps: int):
-        super().rotate(direction.value * steps)
+        for i in range(steps):
+            super().rotate(direction.value)
+            if self.value == 0:
+                self.zero_count += 1
+
 
 def main():
     dial = Dial(50)
     with open('input.txt') as f:
         inputs = f.readlines()
-    results = []
     for s in inputs:
         direction = s[0]
         match direction.lower():
@@ -35,10 +40,8 @@ def main():
                 continue
         steps = int(s[1:])
         dial.rotate(direction, steps)
-        results.append(dial.value)
-    final = len(list(filter(lambda x: x == 0, results)))
     with open('output.txt','w+') as f:
-        f.write(str(final))
+        f.write(str(dial.zero_count))
 
 if __name__ == "__main__":
     main()
