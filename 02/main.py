@@ -1,15 +1,30 @@
+from functools import reduce
+from itertools import batched
 def parse_input():
     with open("input.txt") as f:
         data = f.read()
     data = [r.split("-") for r in data.split(",")]
     return data
 
+def find_factors(n):
+    out =  list(set(reduce(
+        list.__add__,
+        ([i, n//i] for i in range(1, int(n**0.5) + 1) if n % i == 0))))
+    out.sort()
+    return out
+
 def check_range(start, stop):
     for i in range(int(start), int(stop)+1):
-        if (l := len(str(i))) % 2 == 0:
-            split_index = int(l/2)
-            if str(i)[:split_index] == str(i)[split_index:]:
+        length = len(str(i))
+        factors = find_factors(length)
+        for factor in factors:
+            if factor == length:
+                continue
+            batches = list(batched(str(i), factor))
+            if batches.count(batches[0]) == len(batches):
                 yield i
+                print(i)
+                break
 
 def main():
     bad_values = []
