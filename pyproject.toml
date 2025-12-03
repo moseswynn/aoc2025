@@ -6,8 +6,10 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "pytest>=9.0.1",
+    "tomlkit>=0.13.3",
 ]
 
 [project.scripts]
+start-day = "start_day:main"
 day1 = "day1.solution:main"
 day2 = "day2.solution:main"
