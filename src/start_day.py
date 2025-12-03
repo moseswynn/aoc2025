@@ -3,7 +3,7 @@ import tomlkit
 
 def main():
     solution_text = """
-from base_solution import BaseSolution
+from ..base_solution import BaseSolution
 import os
 
 class Solution(BaseSolution):

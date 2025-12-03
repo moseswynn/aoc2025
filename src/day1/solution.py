@@ -1,4 +1,4 @@
-from base_solution import BaseSolution
+from ..base_solution import BaseSolution
 from collections import deque
 from enum import Enum
 import os

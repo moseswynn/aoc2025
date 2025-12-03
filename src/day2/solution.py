@@ -1,4 +1,4 @@
-from base_solution import BaseSolution
+from ..base_solution import BaseSolution
 import os
 from functools import reduce
 from itertools import batched
