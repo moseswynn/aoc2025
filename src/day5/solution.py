@@ -32,7 +32,8 @@ class Solution(BaseSolution):
                 new_range.extend(current_range)
             else:
                 if current_range[0] <= new_range[1]:
-                    new_range[1] = current_range[1]
+                    if current_range[1] >= new_range[1]:
+                        new_range[1] = current_range[1]
                 else:
                     new_ranges.append(tuple(new_range))
                     new_range = list(current_range)                
@@ -54,13 +55,7 @@ class Solution(BaseSolution):
 
     def solve_part2(self):
         self.ranges = self.consolidate_ranges()
-        # return sum(map(lambda x: x[1]-x[0]+1, self.ranges)) #THIS PASSES TESTS, BUT DOES NOT PASS WITH REAL INPUT!?
-        counter=0
-        for start, stop in self.ranges:
-            for _ in range(start,stop+1):
-                counter += 1
-                print(counter)
-        return counter
+        return sum(map(lambda x: x[1]-x[0]+1, self.ranges))
 
 def main():
     input_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'input.txt'))
