@@ -35,12 +35,20 @@ class Solution(BaseSolution):
             if operand == "*":
                 yield reduce(lambda x, y: x * y, numbers)
 
+    def parse_part_2(self):
+        self.input.seek(0)
+        lines = self.input.readlines()
+
+        operands = re.sub(r"([\*\+]\s+)(\s)",r"\1,", lines[-1]).split(",")[:-1]
+        print(operands)
+
 
 
     def solve_part1(self):
         return sum(self.solve_problems())
     
     def solve_part2(self):
+        self.parse_part_2()
         pass
 
 def main():
